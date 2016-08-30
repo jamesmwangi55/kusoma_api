@@ -10,9 +10,9 @@ var express = require('express'),
 var db;
 
 if(process.env.ENV == 'Test'){
-    db = mongoose.connect('mongodb://localhost/kusoma_test');
+    db = mongoose.connect('mongodb://kusoma-db-vm.cloudapp.net');
 } else {
-    db = mongoose.connect('mongodb://localhost/kusoma');
+    db = mongoose.connect('mongodb://kusoma-db-vm.cloudapp.net');
 }
 
 
