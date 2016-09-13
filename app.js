@@ -4,7 +4,8 @@ var express = require('express'),
     morgan = require('morgan')
     logger = require('./utils/logger.js'),
     passport = require('passport')
-    path = require('path');
+    path = require('path'),
+    cors = require('cors');
 
      
 var db;
@@ -22,6 +23,7 @@ var port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(cors());
 app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: false,
