@@ -6,7 +6,7 @@ var routes = function(University, passport){
 
     // university collection routes
     universityRouter.route('/')
-        .post(universityController.isLoggedIn, universityController.create)
+        .post( universityController.create)
         .get(universityController.list);
 
     // tie to university middleware
@@ -15,9 +15,9 @@ var routes = function(University, passport){
     // single university routes
     universityRouter.route('/:universityId')
         .get(universityController.read)
-        .put([universityController.isLoggedIn], universityController.update)
-        .patch([universityController.isLoggedIn], universityController.patch)
-        .delete([universityController.isLoggedIn], universityController.remove);
+        .put(universityController.update)
+        .patch(universityController.patch)
+        .delete(universityController.remove);
 
         // return router
         return universityRouter;

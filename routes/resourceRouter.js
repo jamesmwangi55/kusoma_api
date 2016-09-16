@@ -9,7 +9,7 @@ var routes = function(Resource, passport){
     // resource collection routes
     resourceRouter.route('/:courseId')
         // add this middlware once testing is complete resourceController.isLoggedIn
-        .post([resourceController.isLoggedIn, longTimeout], resourceController.create)
+        .post([longTimeout], resourceController.create)
         .get(resourceController.list);
 
     // tie to resource middleware
@@ -18,9 +18,9 @@ var routes = function(Resource, passport){
     // single resource routes
     resourceRouter.route('/:courseId/:resourceId')
         .get(resourceController.read)
-        .put([resourceController.isLoggedIn], resourceController.update)
-        .patch([resourceController.isLoggedIn], resourceController.patch)
-        .delete([resourceController.isLoggedIn], resourceController.remove);
+        .put(resourceController.update)
+        .patch(resourceController.patch)
+        .delete(resourceController.remove);
 
         // return router
         return resourceRouter;

@@ -6,7 +6,7 @@ var routes = function(Course, passport){
 
     // course collection routes
     courseRouter.route('/:universityId')
-        .post(courseController.isLoggedIn, courseController.create)
+        .post(courseController.create)
         .get(courseController.list);
 
     // tie to course middleware
@@ -15,9 +15,9 @@ var routes = function(Course, passport){
     // single course routes
     courseRouter.route('/:universityId/:courseId')
         .get(courseController.read)
-        .put([courseController.isLoggedIn], courseController.update)
-        .patch([courseController.isLoggedIn], courseController.patch)
-        .delete([courseController.isLoggedIn], courseController.remove);
+        .put(courseController.update)
+        .patch(courseController.patch)
+        .delete(courseController.remove);
 
         // return router
         return courseRouter;
