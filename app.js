@@ -10,11 +10,8 @@ var express = require('express'),
      
 var db;
 
-if(process.env.ENV == 'Test'){
-    db = mongoose.connect('mongodb://kusoma-db-vm.cloudapp.net');
-} else {
-    db = mongoose.connect('mongodb://kusoma-db-vm.cloudapp.net');
-}
+db = mongoose.connect('mongodb://localhost/kusoma');
+
 
 
 
