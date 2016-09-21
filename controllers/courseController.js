@@ -21,23 +21,64 @@ var courseController = function(Course, passport){
     }
 
     var list = function(req, res){
-        Course.find({university: req.params.universityId}, function (err, courses) {
-            if(err){
-                res.status(500).send({msg: err});
-            } else {
-                var returnCourses = new Array();
-                courses.forEach(function(element, index, array){
-                    var newCourse  = element.toJSON();
-                    newCourse.links = {};
-                    newCourse.links.self = 'http://' + req.headers.host + '/api/courses/' + newCourse.university + '/' + newCourse._id;
-                    newCourse.links.resources = 'http://' + req.headers.host + '/api/resources/' + newCourse._id;
-                    newCourse.links.university = 'http://' + req.headers.host + '/api/universities/' + newCourse.university;
-                    newCourse.links.universities = 'http://' + req.headers.host + '/api/universities/';
-                    returnCourses.push(newCourse);
-                })
-                res.json(returnCourses);
-            }
-        })
+        var query = {};
+        if(req.query.code){
+            query.code = req.query.code;
+            Course.find({university: req.params.universityId, code: query.code}, function (err, courses) {
+                if(err){
+                    res.status(500).send({msg: err});
+                } else {
+                    var returnCourses = new Array();
+                    courses.forEach(function(element, index, array){
+                        var newCourse  = element.toJSON();
+                        newCourse.links = {};
+                        newCourse.links.self = 'http://' + req.headers.host + '/api/courses/' + newCourse.university + '/' + newCourse._id;
+                        newCourse.links.resources = 'http://' + req.headers.host + '/api/resources/' + newCourse._id;
+                        newCourse.links.university = 'http://' + req.headers.host + '/api/universities/' + newCourse.university;
+                        newCourse.links.universities = 'http://' + req.headers.host + '/api/universities/';
+                        returnCourses.push(newCourse);
+                    })
+                    res.json(returnCourses);
+                }
+            })
+        } else if(req.query.name) {
+            query.name = req.query.name;
+             Course.find({university: req.params.universityId, name: query.name}, function (err, courses) {
+                if(err){
+                    res.status(500).send({msg: err});
+                } else {
+                    var returnCourses = new Array();
+                    courses.forEach(function(element, index, array){
+                        var newCourse  = element.toJSON();
+                        newCourse.links = {};
+                        newCourse.links.self = 'http://' + req.headers.host + '/api/courses/' + newCourse.university + '/' + newCourse._id;
+                        newCourse.links.resources = 'http://' + req.headers.host + '/api/resources/' + newCourse._id;
+                        newCourse.links.university = 'http://' + req.headers.host + '/api/universities/' + newCourse.university;
+                        newCourse.links.universities = 'http://' + req.headers.host + '/api/universities/';
+                        returnCourses.push(newCourse);
+                    })
+                    res.json(returnCourses);
+                }
+            })
+        } else {
+             Course.find({university: req.params.universityId}, function (err, courses) {
+                if(err){
+                    res.status(500).send({msg: err});
+                } else {
+                    var returnCourses = new Array();
+                    courses.forEach(function(element, index, array){
+                        var newCourse  = element.toJSON();
+                        newCourse.links = {};
+                        newCourse.links.self = 'http://' + req.headers.host + '/api/courses/' + newCourse.university + '/' + newCourse._id;
+                        newCourse.links.resources = 'http://' + req.headers.host + '/api/resources/' + newCourse._id;
+                        newCourse.links.university = 'http://' + req.headers.host + '/api/universities/' + newCourse.university;
+                        newCourse.links.universities = 'http://' + req.headers.host + '/api/universities/';
+                        returnCourses.push(newCourse);
+                    })
+                    res.json(returnCourses);
+                }
+            })
+        } 
     }
 
     var read = function(req, res){
